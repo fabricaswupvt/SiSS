@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AreaController;
-use App\Http\Controllers\FormularioLugarController;
+use App\Http\Controllers\LugarPrestacionController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\CoordinadorController;
 use App\Http\Controllers\PersonaController;
@@ -32,4 +32,4 @@ Route::resource('/proyectos_ofertados', Proyectos_ofertadosController::class);
 
 Route::resource('/menu', MenuController::class);
 
-Route::resource('/FormularioLugarP', FormularioLugarController::class);
+Route::resource('/FormularioLugarP', LugarPrestacionController::class);

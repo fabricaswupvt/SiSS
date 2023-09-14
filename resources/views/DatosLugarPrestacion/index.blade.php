@@ -99,15 +99,15 @@
             </div>
             <div class="col-md-4">
               <label class="form-label">Nombre del responsable</label>
-              <input type="text" class="form-control" name="nombre" id="nombre" value="{{old('nombre')}}">
+              <input type="text" class="form-control" name="nombre" id="nombre" value="{{old('nombre')}}" required>
             </div>
             <div class="col-md-4">
               <label class="form-label">Apellido paterno</label>
-              <input type="text" class="form-control" name="ape_pat" id="ape_pat" value="{{old('ape_pat')}}">
+              <input type="text" class="form-control" name="ape_pat" id="ape_pat" value="{{old('ape_pat')}}" required>
             </div>
             <div class="col-md-4">
               <label class="form-label">Apellido materno</label>
-              <input type="text" class="form-control" name="ape_mat" id="ape_mat" value="{{old('ape_mat')}}">
+              <input type="text" class="form-control" name="ape_mat" id="ape_mat" value="{{old('ape_mat')}}" required>
             </div>
             <div class="col-md-4">
               <label class="form-label">Título</label>

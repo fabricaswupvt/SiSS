@@ -3,14 +3,55 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\LugarPrestacion;
+use App\Models\Persona;
+use App\Models\Contacto;
 
-class FormularioLugarController extends Controller
+class LugarPrestacionController extends Controller
 {
     public function index()
     {
-        
+        $LugarPrestacion= LugarPrestacion::all();
         $paises = $this->obtenerPaises();
-        return view('DatosLugarPrestacion.index', ['paises' => $paises]);
+        return view('DatosLugarPrestacion.index', ['paises' => $paises], ['LugarPrestacion'=>$LugarPrestacion]);
+    }
+
+    
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required',
+            'ape_pat' => 'required',
+            'ape_mat' => 'required',
+
+        ]);
+
+        // Crear y guardar el registro de la persona
+        $persona = new Persona();
+        $persona->nombre = $request->input('nombre');
+        $persona->ape_pat = $request->input('ape_pat');
+        $persona->ape_mat = $request->input('ape_mat');
+        $persona->titulo = $request->input('titulo');
+        $persona->save();
+
+    // Crear y guardar el registro de contacto
+        $contacto = new Contacto();
+        $contacto->telefono_fijo = intval($request->input('telefono_fijo'));
+        $contacto->celular = intval($request->input('celular'));
+        $contacto->telefono_ref = intval($request->input('telefono_ref'));
+        $contacto->correo = $request->input('correo');
+        $contacto->save();
+
+    // Crear y guardar el registro del coordinador relacionado con la persona y el contacto
+        $coordinador = new Coordinador();
+        $coordinador->id_persona = $persona->idpersona; // Asignar el ID de la persona creada
+        $coordinador->puesto = $request->input('puesto');
+        $coordinador->id_contacto = $contacto->idcontacto; // Asignar el ID del contacto creado
+        $coordinador->estatus = $request->input('estatus');
+        $coordinador->save();
+
+        return view("LugarPrestacion .message",['msg' => "Registro guardado"]);
+
     }
 
 
@@ -216,7 +257,4 @@ class FormularioLugarController extends Controller
         return $paises;
     }
     
-    
-
-
 }
