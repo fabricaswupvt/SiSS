@@ -13,6 +13,9 @@ class Estado extends Model
 
     protected $fillable = ['nombre_edo']; // Campos que se pueden asignar masivamente
 
-    // Relación con el modelo Coordinador
+    // Relación con el modelo Pais
+    public function pais(){
+        return $this->belongsTo(Direccion::class,'id_pais','idpais');
+    }
     use HasFactory;
 }

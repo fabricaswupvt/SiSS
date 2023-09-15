@@ -13,6 +13,9 @@ class Colonia extends Model
 
     protected $fillable = ['nombre_col', 'cp']; // Campos que se pueden asignar masivamente
 
-    // Relación con el modelo Coordinador
+    // Relación con el modelo Ciudad
+    public function ciudad(){
+        return $this->belongsTo(Direccion::class,'id_ciudad','idciudad');
+    }
     use HasFactory;
 }

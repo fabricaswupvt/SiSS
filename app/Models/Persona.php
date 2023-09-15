@@ -16,6 +16,6 @@ class Persona extends Model
     // Relación con el modelo Coordinador
     public function coordinador()
     {
-        return $this->hasOne(Coordinador::class, 'id_persona', 'id');
+        return $this->hasOne(Coordinador::class, 'id_persona', 'idpersona');
     }
 }

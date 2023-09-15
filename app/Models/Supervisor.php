@@ -13,6 +13,12 @@ class Supervisor extends Model
 
     protected $fillable = ['cargo',]; // Campos que se pueden asignar masivamente
 
-    // Relación con el modelo Coordinador
+    // Relación con el modelo Persona y Contacto
+    public function persona(){
+        return $this->belongsTo(Direccion::class,'id_persona','idpersona');
+    }
+    public function contacto(){
+        return $this->belongsTo(Direccion::class,'id_contacto','idcontacto');
+    }
     use HasFactory;
 }

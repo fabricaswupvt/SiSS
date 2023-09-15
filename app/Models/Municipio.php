@@ -13,6 +13,9 @@ class Municipio extends Model
 
     protected $fillable = ['nombre_mun']; // Campos que se pueden asignar masivamente
 
-    // Relación con el modelo Coordinador
+    // Relación con el modelo Estado
+    public function estado(){
+        return $this->belongsTo(Direccion::class,'id_estado','idestado');
+    }
     use HasFactory;
 }

@@ -13,6 +13,10 @@ class Direccion extends Model
 
     protected $fillable = ['calle', 'no_ext', 'no_int', 'referencia']; // Campos que se pueden asignar masivamente
 
-    // Relación con el modelo Coordinador
+    // Relación con el modelo Colonia
+    
+    public function colonia(){
+        return $this->belongsTo(Direccion::class,'id_colonia','idcolonia');
+    }
     use HasFactory;
 }

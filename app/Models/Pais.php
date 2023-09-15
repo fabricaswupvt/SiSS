@@ -13,6 +13,5 @@ class Pais extends Model
 
     protected $fillable = ['nombre_pais']; // Campos que se pueden asignar masivamente
 
-    // Relación con el modelo Coordinador
     use HasFactory;
 }
