@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\LugarPrestacion;
 use App\Models\Persona;
 use App\Models\Contacto;
+use App\Models\Direccion;
+use App\Models\Colonia;
+use App\Models\Ciudad;
+use App\Models\Municipio;
+use App\Models\Estado;
+use App\Models\Pais;
+use App\Models\Departamento;
+use App\Models\Supervisor;
 
 class LugarPrestacionController extends Controller
 {
@@ -23,8 +31,73 @@ class LugarPrestacionController extends Controller
             'nombre' => 'required',
             'ape_pat' => 'required',
             'ape_mat' => 'required',
+            'titulo' => 'required',
+            'cargo' => 'required',
+            'telefono_fijo' => 'required',
+            'celular' => 'required',
+            'telefono_ref' => 'required',
+            'correo' => 'required|email',
+            'nombre_depto' => 'required',
+            'nombre_pais' => 'required',
+            'nombre_edo' => 'required',
+            'nombre_mun' => 'required',
+            'nombre_ciudad' => 'required',
+            'nombre_col' => 'required',
+            'cp' => 'required',
+            'calle' => 'required',
+            'no_ext' => 'required',
+            'no_int' => 'required',
+            'referencia' => 'required',
+            'giro' => 'required',
+            'tipolp' => 'required',
+            'sector' => 'required',
+            'nombre_lp' => 'required',
+            'rfc' => 'required',
 
         ]);
+
+        //Crear y guardar el registro de pais
+        $pais = new Pais();
+        $pais->nombre_pais = $request->input('nombre_pais');
+        $pais->save();
+
+        //Crear y guardar el registro de estado
+        $estado = new Estado();
+        $estado->nombre_edo = $request->input('nombre_edo');
+        $estado->id_pais = $pais->idpais; // Asignar el ID del pais creado
+
+        //Crear y guardar el registro de municipio
+        $municipio = new Municipio();
+        $municipio->nombre_mun = $request->input('nombre_mun');
+        $municipio->id_estado = $estado->idestado; // Asignar el ID del estado creado
+
+        //Crear y guardar el registro de ciudad
+        $ciudad = new Ciudad();
+        $ciudad->nombre_ciudad = $request->input('nombre_ciudad');
+        $estado->id_municipio = $municipio->idmunicipio; // Asignar el ID del municipio creado
+
+        //Crear y guardar el registro de colonia
+        $colonia = new Colonia();
+        $colonia->nombre_col = $request->input('nombre_col');
+        $colonia->id_ciudad = $ciudad->idciudad; // Asignar el ID de la ciudad creada
+        $colonia->cp = $request->input('cp');
+
+        //Crear y guardar el registro de direccion
+        $direccion = new Direccion();
+        $direccion->calle = $request->input('calle');
+        $direccion->no_ext = $request->input('no_ext');
+        $direccion->no_int = $request->input('no_int');
+        $direccion->id_colonia = $colonia->idcolonia; // Asignar el ID de la colonia creada
+        $direccion->referencia = $request->input('referencia');
+        
+        //Crear y guardar el registro de lugar de prestacion
+        $lugar_prestacion = new LugarPrestacion();
+        $lugar_prestacion->nombre_lp = $request->input('nombre_lp');
+        $lugar_prestacion->rfc = $request->input('rfc');
+        $lugar_prestacion->id_direccion = $direccion->iddireccion; // Asignar el ID de la direccion creada
+        $lugar_prestacion->tipolp = $request->input('tipolp');
+        $lugar_prestacion->sector = $request->input('sector');
+        $lugar_prestacion->giro = $request->input('giro');
 
         // Crear y guardar el registro de la persona
         $persona = new Persona();
@@ -34,23 +107,22 @@ class LugarPrestacionController extends Controller
         $persona->titulo = $request->input('titulo');
         $persona->save();
 
-    // Crear y guardar el registro de contacto
+        // Crear y guardar el registro de contacto
         $contacto = new Contacto();
         $contacto->telefono_fijo = intval($request->input('telefono_fijo'));
         $contacto->celular = intval($request->input('celular'));
         $contacto->telefono_ref = intval($request->input('telefono_ref'));
         $contacto->correo = $request->input('correo');
         $contacto->save();
+    
+        //Crear y guardar el registro de supervisor
+        $supervisor = new Supervisor();
+        $supervisor->cargo = $request->input('cargo');
+        $supervisor->id_persona = $persona->idpersona; // Asignar el ID de la persona creada
+        $supervisor->id_contacto = $persona->idcontacto; // Asignar el ID del contacto creado
+        
 
-    // Crear y guardar el registro del coordinador relacionado con la persona y el contacto
-        $coordinador = new Coordinador();
-        $coordinador->id_persona = $persona->idpersona; // Asignar el ID de la persona creada
-        $coordinador->puesto = $request->input('puesto');
-        $coordinador->id_contacto = $contacto->idcontacto; // Asignar el ID del contacto creado
-        $coordinador->estatus = $request->input('estatus');
-        $coordinador->save();
-
-        return view("LugarPrestacion .message",['msg' => "Registro guardado"]);
+        return view("LugarPrestacion.message",['msg' => "Registro guardado"]);
 
     }
 

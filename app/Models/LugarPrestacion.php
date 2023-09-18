@@ -12,6 +12,7 @@ class LugarPrestacion extends Model
     protected $primaryKey = 'idlugar_prestacion';
     
     protected $fillable = ['rfc','nombre_lp','sector','tipolp','giro'];
+    
     //Establecer las relaciones con lo modelos
     public function direccion(){
         return $this->belongsTo(Direccion::class,'id_direccion','iddireccion');

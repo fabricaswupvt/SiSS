@@ -13,11 +13,11 @@
           <div class="row">
             <div class="col-md-4">
               <label class="form-label">RFC</label>
-              <input type="text" class="form-control" name="rfc" id="rfc" value="{{old('rfc')}}">
+              <input type="text" class="form-control" name="rfc" id="rfc" value="{{old('rfc')}}" required>
             </div>
             <div class="col-md-4">
               <label class="form-label">Nombre de lugar de prestación</label>
-              <input type="text" class="form-control" name="nombre_lp" id="nombre_lp" value="{{old('nombre_lp')}}">
+              <input type="text" class="form-control" name="nombre_lp" id="nombre_lp" value="{{old('nombre_lp')}}" required>
             </div>
             <div class="col-md-4">
               <label for="sector" class="form-label">Sector</label>
@@ -38,7 +38,7 @@
             </div>
             <div class="col-md-4">
               <label class="form-label">Giro</label>
-              <input type="text" class="form-control" name="giro" id="giro" value="{{old('giro')}}">
+              <input type="text" class="form-control" name="giro" id="giro" value="{{old('giro')}}" required>
             </div>
           </div>
           {{--Informacion de Dirección--}}
@@ -46,31 +46,39 @@
           <div class="row">
             <div class="col-md-4">
               <label class="form-label">Calle</label>
-              <input type="text" class="form-control" name="calle" id="calle" value="{{old('calle')}}">
+              <input type="text" class="form-control" name="calle" id="calle" value="{{old('calle')}}" required>
             </div>
             <div class="col-md-4">
               <label class="form-label">Nº Exterior</label>
-              <input type="text" class="form-control" name="no_ext" id="no_ext" value="{{old('no_ext')}}">
+              <input type="text" class="form-control" name="no_ext" id="no_ext" value="{{old('no_ext')}}" required>
             </div>
             <div class="col-md-4">
               <label class="form-label">Nº Interior</label>
-              <input type="text" class="form-control" name="no_int" id="no_int" value="{{old('no_int')}}">
+              <input type="text" class="form-control" name="no_int" id="no_int" value="{{old('no_int')}}" required>
             </div>
             <div class="col-md-4">
               <label class="form-label">Referencia para llegar</label>
-              <input type="text" class="form-control" name="referencia" id="referencia" value="{{old('referencia')}}">
+              <input type="text" class="form-control" name="referencia" id="referencia" value="{{old('referencia')}}" required>
             </div>
             <div class="col-md-4">
               <label class="form-label">Colonia</label>
-              <input type="text" class="form-control" name="nombre_col" id="nombre_col" value="{{old('nombre_col')}}">
+              <input type="text" class="form-control" name="nombre_col" id="nombre_col" value="{{old('nombre_col')}}" required>
             </div>
             <div class="col-md-4">
               <label class="form-label">Código postal</label>
-              <input type="text" class="form-control" name="cp" id="cp" value="{{old('cp')}}">
+              <input type="text" class="form-control" name="cp" id="cp" value="{{old('cp')}}" required>
             </div>
             <div class="col-md-4">
               <label class="form-label">Ciudad</label>
-              <input type="text" class="form-control" name="nombre_ciudad" id="nombre_ciudad" value="{{old('nombre_ciudad')}}">
+              <input type="text" class="form-control" name="nombre_ciudad" id="nombre_ciudad" value="{{old('nombre_ciudad')}}" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Municipio</label>
+              <input type="text" class="form-control" name="nombre_num" id="nombre_num" value="{{old('nombre_num')}}" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Estado</label>
+              <input type="text" class="form-control" name="nombre_edo" id="nombre_edo" value="{{old('nombre_edo')}}" required>
             </div>
             <div class="col-md-4">
               <label class="form-label">País</label>
@@ -81,21 +89,13 @@
                   @endforeach
               </select>
             </div>
-            <div class="col-md-4">
-              <label class="form-label">Estado</label>
-              <input type="text" class="form-control" name="nombre_edo" id="nombre_edo" value="{{old('nombre_edo')}}">
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">Municipio</label>
-              <input type="text" class="form-control" name="nombre_num" id="nombre_num" value="{{old('nombre_num')}}">
-            </div>
           </div>
           {{--Informacion de Responsable del lugar de prestación--}}
           <label class="form-label mb-1" style="font-weight: bold;">Información del responsable del lugar de prestación:</label>
           <div class="row">
           <div class="col-md-4">
               <label class="form-label">Nombre del departamento</label>
-              <input type="text" class="form-control" name="nombre_depto" id="nombre_depto" value="{{old('nombre_depto')}}">
+              <input type="text" class="form-control" name="nombre_depto" id="nombre_depto" value="{{old('nombre_depto')}}" required>
             </div>
             <div class="col-md-4">
               <label class="form-label">Nombre del responsable</label>
@@ -111,11 +111,11 @@
             </div>
             <div class="col-md-4">
               <label class="form-label">Título</label>
-              <input type="text" class="form-control" name="titulo" id="titulo" value="{{old('titulo')}}">
+              <input type="text" class="form-control" name="titulo" id="titulo" value="{{old('titulo')}}" required>
             </div>
             <div class="col-md-4">
               <label class="form-label">Cargo</label>
-              <input type="text" class="form-control" name="cargo_responsable" id="cargo_responsable" value="{{old('cargo_responsable')}}">
+              <input type="text" class="form-control" name="cargo_responsable" id="cargo_responsable" value="{{old('cargo_responsable')}}" required>
             </div>
           </div>
 
@@ -124,19 +124,19 @@
         <div class="row">
             <div class="col-md-4">
               <label class="form-label">Teléfono fijo</label>
-              <input type="text" class="form-control" name="telefono_fijo" id="telefono_fijo" value="{{old('telefono_fijo')}}">
+              <input type="text" class="form-control" name="telefono_fijo" id="telefono_fijo" value="{{old('telefono_fijo')}}" required>
             </div>
             <div class="col-md-4">
               <label class="form-label">Teléfono celular</label>
-              <input type="text" class="form-control" name="celular" id="celular" value="{{old('celular')}}">
+              <input type="text" class="form-control" name="celular" id="celular" value="{{old('celular')}}" required>
             </div>
             <div class="col-md-4">
               <label class="form-label">Teléfono de referencia</label>
-              <input type="text" class="form-control" name="telefono_ref" id="telefono_ref" value="{{old('telefono_ref')}}">
+              <input type="text" class="form-control" name="telefono_ref" id="telefono_ref" value="{{old('telefono_ref')}}" required>
             </div>
             <div class="col-md-4">
               <label for="exampleFormControlInput1" class="form-label">Correo</label>
-              <input type="text" class="form-control" name="correo" id="correo" value="{{old('correo')}}">
+              <input type="text" class="form-control" name="correo" id="correo" value="{{old('correo')}}" required>
             </div>
         </div> 
         <div class="d-flex justify-content-center">
