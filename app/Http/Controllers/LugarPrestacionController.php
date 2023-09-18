@@ -19,9 +19,9 @@ class LugarPrestacionController extends Controller
 {
     public function index()
     {
-        $LugarPrestacion= LugarPrestacion::all();
+        $lugar_prestacion= LugarPrestacion::all();
         $paises = $this->obtenerPaises();
-        return view('DatosLugarPrestacion.index', ['paises' => $paises], ['LugarPrestacion'=>$LugarPrestacion]);
+        return view('DatosLugarPrestacion.index', ['paises' => $paises], ['DatosLugarPrestacion'=>$lugar_prestacion]);
     }
 
     
@@ -65,22 +65,26 @@ class LugarPrestacionController extends Controller
         $estado = new Estado();
         $estado->nombre_edo = $request->input('nombre_edo');
         $estado->id_pais = $pais->idpais; // Asignar el ID del pais creado
+        $estado->save();
 
         //Crear y guardar el registro de municipio
         $municipio = new Municipio();
         $municipio->nombre_mun = $request->input('nombre_mun');
         $municipio->id_estado = $estado->idestado; // Asignar el ID del estado creado
+        $municipio->save();
 
         //Crear y guardar el registro de ciudad
         $ciudad = new Ciudad();
         $ciudad->nombre_ciudad = $request->input('nombre_ciudad');
-        $estado->id_municipio = $municipio->idmunicipio; // Asignar el ID del municipio creado
+        $ciudad->id_municipio = $municipio->idmunicipio; // Asignar el ID del municipio creado
+        $ciudad->save();
 
         //Crear y guardar el registro de colonia
         $colonia = new Colonia();
         $colonia->nombre_col = $request->input('nombre_col');
         $colonia->id_ciudad = $ciudad->idciudad; // Asignar el ID de la ciudad creada
         $colonia->cp = $request->input('cp');
+        $colonia->save();
 
         //Crear y guardar el registro de direccion
         $direccion = new Direccion();
@@ -89,6 +93,7 @@ class LugarPrestacionController extends Controller
         $direccion->no_int = $request->input('no_int');
         $direccion->id_colonia = $colonia->idcolonia; // Asignar el ID de la colonia creada
         $direccion->referencia = $request->input('referencia');
+        $direccion->save();
         
         //Crear y guardar el registro de lugar de prestacion
         $lugar_prestacion = new LugarPrestacion();
@@ -98,6 +103,7 @@ class LugarPrestacionController extends Controller
         $lugar_prestacion->tipolp = $request->input('tipolp');
         $lugar_prestacion->sector = $request->input('sector');
         $lugar_prestacion->giro = $request->input('giro');
+        $lugar_prestacion->save();
 
         // Crear y guardar el registro de la persona
         $persona = new Persona();
@@ -119,10 +125,12 @@ class LugarPrestacionController extends Controller
         $supervisor = new Supervisor();
         $supervisor->cargo = $request->input('cargo');
         $supervisor->id_persona = $persona->idpersona; // Asignar el ID de la persona creada
-        $supervisor->id_contacto = $persona->idcontacto; // Asignar el ID del contacto creado
+        $supervisor->id_contacto = $contacto->idcontacto; // Asignar el ID del contacto creado
+        $supervisor->save();
         
 
-        return view("LugarPrestacion.message",['msg' => "Registro guardado"]);
+        return view("DatosLugarPrestacion.message",['msg' => "Registro guardado"]);
+       
 
     }
 

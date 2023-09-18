@@ -33,3 +33,6 @@ Route::resource('/proyectos_ofertados', Proyectos_ofertadosController::class);
 Route::resource('/menu', MenuController::class);
 
 Route::resource('/FormularioLugarP', LugarPrestacionController::class);
+
+Route::post('/ruta-para-store', [LugarPrestacionController::class, 'store'])->name('formularioLugarPrestacion.store');
+
