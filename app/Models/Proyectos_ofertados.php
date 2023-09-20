@@ -27,8 +27,8 @@ class Proyectos_ofertados extends Model
         return $this->belongsTo(Areas::class,'area','idarea');
     }
 
-    //public function lugar_prestacion()
-    //{
-    //    return $this->belongsTo(Areas::class,'id_lugar_prestacion','idlugar_prestacion');
-    //}
+    public function lugar_prestacion()
+    {
+        return $this->belongsTo(Areas::class,'id_lugar_prestacion','idlugar_prestacion');
+    }
 }

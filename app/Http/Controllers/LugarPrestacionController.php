@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\LugarPrestacion;
 use App\Models\Persona;
@@ -17,13 +18,21 @@ use App\Models\Supervisor;
 
 class LugarPrestacionController extends Controller
 {
-    public function index()
-    {
-        $lugar_prestacion= LugarPrestacion::all();
-        $paises = $this->obtenerPaises();
-        return view('DatosLugarPrestacion.index', ['paises' => $paises], ['DatosLugarPrestacion'=>$lugar_prestacion]);
-    }
+    public function index(){
 
+        $datos = DB::table('lugar_prestacion')->get(); // Reemplaza 'nombre_de_la_tabla' con el nombre real de tu tabla
+        return view('DatosLugarPrestacion.index', compact('datos'));
+    }
+    
+    public function create(){
+        $lugar_prestacion = LugarPrestacion::all();
+        $paises = $this->obtenerPaises();
+
+        return view('DatosLugarPrestacion.create', [
+            'paises' => $paises,
+            'LugarPrestacion' => $lugar_prestacion
+        ]);
+    }
     
     public function store(Request $request)
     {
@@ -128,11 +137,149 @@ class LugarPrestacionController extends Controller
         $supervisor->id_contacto = $contacto->idcontacto; // Asignar el ID del contacto creado
         $supervisor->save();
         
+        //Crear y guardar el registro de departamento 
+        $departamento_lp = new Departamento();
+        $departamento_lp->nombre_depto = $request->input('nombre_depto');
+        $departamento_lp->save();
+
+
 
         return view("DatosLugarPrestacion.message",['msg' => "Registro guardado"]);
        
 
     }
+    public function show(LugarPrestacion $lugar_prestacion)
+    {
+      
+    }
+
+    public function edit($idlugar_prestacion)
+    {
+        $lugar_prestacion= LugarPrestacion::find($idlugar_prestacion);
+        return view('DatosLugarPrestacion.edit',['LugarPrestacion'=>$lugar_prestacion,
+        'direccion'=>Direccion::all(),
+        'colonia'=>Colonia::all(),
+        'ciudad'=>Ciudad::all(),
+        'municipio'=>Municipio::all(),
+        'estado'=>Estado::all(),
+        'pais'=>Pais::all(),
+        'departamento'=>Departamento::all(),
+        'persona'=>Persona::all(),
+        'contacto'=>Contacto::all(),
+        'supervisor'=>Supervisor::all(),
+    ]);
+    }
+
+    public function update(Request $request, $idlugar_prestacion)
+    {
+        $request->validate([
+            'nombre' => 'required',
+            'ape_pat' => 'required',
+            'ape_mat' => 'required',
+            'titulo' => 'required',
+            'cargo' => 'required',
+            'telefono_fijo' => 'required',
+            'celular' => 'required',
+            'telefono_ref' => 'required',
+            'correo' => 'required|email',
+            'nombre_depto' => 'required',
+            'nombre_pais' => 'required',
+            'nombre_edo' => 'required',
+            'nombre_mun' => 'required',
+            'nombre_ciudad' => 'required',
+            'nombre_col' => 'required',
+            'cp' => 'required',
+            'calle' => 'required',
+            'no_ext' => 'required',
+            'no_int' => 'required',
+            'referencia' => 'required',
+            'giro' => 'required',
+            'tipolp' => 'required',
+            'sector' => 'required',
+            'nombre_lp' => 'required',
+            'rfc' => 'required',
+        ]);
+    
+        // Obtener el coordinador que deseas actualizar
+        $lugar_prestacion = LugarPrestacion::find($idlugar_prestacion);
+        
+        $pais = Pais::find($estado->id_pais);
+        $pais->nombre_pais = $request->input('nombre_pais');
+        $pais->save();
+
+        $estado = Estado::find($municipio->id_estado);
+        $estado->nombre_edo = $request->input('nombre_edo');
+        $estado->save();
+
+        $municipio = Municipio::find($ciudad->id_ciudad);
+        $municipio->nombre_mun = $request->input('nombre_mun');
+        $municipio->save();
+     
+        $ciudad = Ciudad::find($colonia->id_ciudad);
+        $ciudad->nombre_ciudad = $request->input('nombre_ciudad');
+        $ciudad->save();
+
+        $colonia = Colonia::find($direccion->id_colonia);
+        $colonia->nombre_col = $request->input('nombre_col');
+        $colonia->cp = $request->input('cp');
+        $colonia->save();
+
+        $direccion = Direccion::find($lugar_prestacion->id_direccion);
+        $direccion->calle = $request->input('calle');
+        $direccion->no_ext = $request->input('no_ext');
+        $direccion->no_int = $request->input('no_int');
+        $direccion->referencia = $request->input('referencia');
+        $direccion->save();
+        
+        $lugar_prestacion = LugarPrestacion::find($idlugar_prestacion);
+        $lugar_prestacion->nombre_lp = $request->input('nombre_lp');
+        $lugar_prestacion->rfc = $request->input('rfc');
+        $lugar_prestacion->tipolp = $request->input('tipolp');
+        $lugar_prestacion->sector = $request->input('sector');
+        $lugar_prestacion->giro = $request->input('giro');
+        $lugar_prestacion->save();
+
+        $persona = Persona::find($idpersona);
+        $persona->nombre = $request->input('nombre');
+        $persona->ape_pat = $request->input('ape_pat');
+        $persona->ape_mat = $request->input('ape_mat');
+        $persona->titulo = $request->input('titulo');
+        $persona->save();
+    
+        $contacto = Contacto::find($idcontacto);
+        $contacto->telefono_fijo = intval($request->input('telefono_fijo'));
+        $contacto->celular = intval($request->input('celular'));
+        $contacto->telefono_ref = intval($request->input('telefono_ref'));
+        $contacto->correo = $request->input('correo');
+        $contacto->save();
+
+         //Crear y guardar el registro de supervisor
+         $supervisor = Supervisor::find($idsupervisor);
+         $supervisor->cargo = $request->input('cargo');
+         $supervisor->save();
+         
+         //Crear y guardar el registro de departamento 
+         $departamento_lp = Departamento::find($iddepartamento);
+         $departamento_lp->nombre_depto = $request->input('nombre_depto');
+         $departamento_lp->save();
+
+    
+        return view("DatosLugarPrestacion.message", ['msg' => "Registro actualizado"]);
+    }
+    
+
+        public function destroy($idcoordinador)
+        {
+            $coordinador = Coordinador::find($idcoordinador);
+            $persona = $coordinador->persona;
+            $contacto = $coordinador->contacto;
+    
+            $coordinador->delete();
+            $persona->delete();
+            $contacto->delete();
+    
+            return redirect("coordinador");
+        }
 
 
     public function obtenerPaises()
@@ -336,5 +483,7 @@ class LugarPrestacionController extends Controller
     
         return $paises;
     }
+
+   
     
 }

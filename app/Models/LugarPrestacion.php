@@ -10,8 +10,17 @@ class LugarPrestacion extends Model
     public $timestamps = false;
     protected $table='lugar_prestacion';
     protected $primaryKey = 'idlugar_prestacion';
-    
-    protected $fillable = ['rfc','nombre_lp','sector','tipolp','giro'];
+    protected $fillable = [
+        'nombre_lp',
+        'rfc',
+        'tipolp',
+        'sector',
+        'giro',
+        'estatus',
+        // Agrega aquí las columnas que deseas poder llenar mediante el modelo.
+    ];
+
+
     
     //Establecer las relaciones con lo modelos
     public function direccion(){
