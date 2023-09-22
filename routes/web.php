@@ -36,6 +36,10 @@ Route::resource('/FormularioLugarP', LugarPrestacionController::class);
 
 Route::post('/ruta-para-store', [LugarPrestacionController::class, 'store'])->name('formularioLugarPrestacion.store');
 
+Route::post('/ruta-para-actualizar/{idlugar_prestacion}', [LugarPrestacionController::class, 'update'])->name('formularioLugarPrestacion.update');
+
+Route::get('/ruta-para-editar/{idlugar_prestacion}', [LugarPrestacionController::class, 'edit'])->name('formularioLugarPrestacion.edit');
+
 
 
 

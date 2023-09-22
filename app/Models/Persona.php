@@ -18,4 +18,5 @@ class Persona extends Model
     {
         return $this->hasOne(Coordinador::class, 'id_persona', 'idpersona');
     }
+    use HasFactory;
 }

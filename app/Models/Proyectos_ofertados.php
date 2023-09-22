@@ -31,4 +31,5 @@ class Proyectos_ofertados extends Model
     {
         return $this->belongsTo(Areas::class,'id_lugar_prestacion','idlugar_prestacion');
     }
+    use HasFactory;
 }

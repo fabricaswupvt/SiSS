@@ -15,7 +15,7 @@ class Municipio extends Model
 
     // Relación con el modelo Estado
     public function estado(){
-        return $this->belongsTo(Direccion::class,'id_estado','idestado');
+        return $this->belongsTo(Estado::class,'id_estado');
     }
     use HasFactory;
 }

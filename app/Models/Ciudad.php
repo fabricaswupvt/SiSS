@@ -15,7 +15,7 @@ class Ciudad extends Model
 
     // Relación con el modelo Municipio
     public function municipio(){
-        return $this->belongsTo(Direccion::class,'id_municipio','idmunicipio');
+        return $this->belongsTo(Municipio::class,'id_municipio');
     }
     use HasFactory;
 }

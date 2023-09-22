@@ -23,9 +23,10 @@ class LugarPrestacion extends Model
 
     
     //Establecer las relaciones con lo modelos
-    public function direccion(){
-        return $this->belongsTo(Direccion::class,'id_direccion','iddireccion');
-    }
+    public function direccion()
+{
+    return $this->belongsTo(Direccion::class, 'id_direccion');
+}
 
     public function proyectos_ofertados(){
         return $this->belongsTo(Proyectos_ofertados::class,'id_lugar_prestacion','idlugar_prestacion');

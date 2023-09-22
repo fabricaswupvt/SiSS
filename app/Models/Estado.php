@@ -15,7 +15,7 @@ class Estado extends Model
 
     // Relación con el modelo Pais
     public function pais(){
-        return $this->belongsTo(Direccion::class,'id_pais','idpais');
+        return $this->belongsTo(Pais::class,'id_pais');
     }
     use HasFactory;
 }

@@ -13,7 +13,6 @@ class Departamento extends Model
 
     protected $fillable = ['nombre_depto']; // Campos que se pueden asignar masivamente
 
-   
 
     use HasFactory;
 }

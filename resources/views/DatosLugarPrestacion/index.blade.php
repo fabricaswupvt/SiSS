@@ -29,7 +29,8 @@
                     </td>
                     <td style="border: 1px solid black; text-align: center;">
                         <!-- Boton de editar -->
-                        <a href="{{url('LugarPrestacion/'.$dato->idlugar_prestacion.'/edit')}}" class="btn btn-success btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
+                        <a href="{{ route('formularioLugarPrestacion.edit', ['idlugar_prestacion' => $dato->idlugar_prestacion]) }}" class="btn btn-success btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
+
                     </td>
                     <td style="border: 1px solid black; text-align: center;">
                         <form action="{{url('LugarPrestacion/'.$dato->idlugar_prestacion)}}" method="post">

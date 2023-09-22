@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Supervisor extends Model
+class Responsable extends Model
 {
     public $timestamps = false;
-    protected $table = 'supervisor';
-    protected $primaryKey = 'idsupervisor';
+    protected $table = 'responsable';
+    protected $primaryKey = 'idresponsable';
 
     protected $fillable = ['cargo',]; // Campos que se pueden asignar masivamente
 
@@ -19,6 +19,11 @@ class Supervisor extends Model
     }
     public function contacto(){
         return $this->belongsTo(Contacto::class,'id_contacto');
+    }
+
+    public function departamento()
+    {
+        return $this->belongsTo(Departamento::class, 'id_lp_depto');
     }
     use HasFactory;
 }

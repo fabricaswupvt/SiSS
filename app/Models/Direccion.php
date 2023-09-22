@@ -15,8 +15,13 @@ class Direccion extends Model
 
     // Relación con el modelo Colonia
     
-    public function colonia(){
-        return $this->belongsTo(Direccion::class,'id_colonia','idcolonia');
+    public function lugarPrestacion()
+    {
+        return $this->hasMany(LugarPrestacion::class, 'id_direccion');
     }
+    public function colonia()
+{
+    return $this->belongsTo(Colonia::class, 'id_colonia');
+}
     use HasFactory;
 }

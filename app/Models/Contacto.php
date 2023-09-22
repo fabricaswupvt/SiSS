@@ -18,4 +18,5 @@ class Contacto extends Model
     {
         return $this->hasOne(Coordinador::class, 'id_contacto', 'id');
     }
+    use HasFactory;
 }
