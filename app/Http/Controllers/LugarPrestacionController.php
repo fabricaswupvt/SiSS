@@ -259,20 +259,28 @@ class LugarPrestacionController extends Controller
     return view("DatosLugarPrestacion.message", ['msg' => "Registro actualizado"]);
 }
 
-    
+public function destroy($idlugar_prestacion)
+{
+    // Buscar y eliminar registros relacionados en la tabla 'rel_lug_pres_depto'
+    RelLugPresDepto::where('id_lugar_prest', $idlugar_prestacion)->delete();
 
-        public function destroy($idcoordinador)
-        {
-            $coordinador = Coordinador::find($idcoordinador);
-            $persona = $coordinador->persona;
-            $contacto = $coordinador->contacto;
-    
-            $coordinador->delete();
-            $persona->delete();
-            $contacto->delete();
-    
-            return redirect("coordinador");
-        }
+    // Buscar el lugar de prestación por su ID y eliminarlo
+    $lugar_prestacion = LugarPrestacion::find($idlugar_prestacion);
+
+    if ($lugar_prestacion) {
+        // Eliminar el lugar de prestación
+        $lugar_prestacion->delete();
+
+        // Redirigir a la página de índice con un mensaje
+        return redirect()->route('DatosLugarPrestacion.index')->with('success', 'Registro eliminado correctamente');
+    }
+
+    // Si no se encuentra el lugar de prestación, redirigir con un mensaje de error
+    return redirect()->route('DatosLugarPrestacion.index')->with('error', 'El registro no se encontró o ya ha sido eliminado');
+}
+
+
+
 
 
     public function obtenerPaises()

@@ -8,10 +8,17 @@
         <h2 class="text-center mb-5">Lugar de Prestación</h2>
 
         <!-- Barra de búsqueda -->
-        <div class="mb-3" style="width: 25%;">
+        <div class="input-group mb-3" style="width: 25%;">
             <input type="text" id="search" class="form-control" placeholder="Buscar...">
+            <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-magnifying-glass"></i></span>
         </div>
 
+        <div style="text-align: right; margin-top: 10px; margin-bottom: 10px;">
+            <a href="{{ route('FormularioLugarP.create') }}" class="btn btn-secondary btn-sm"><i class="fa-solid fa-circle-plus"></i> Nuevo Lugar de Prestacion</a>
+        </div>
+
+        <!-- Tabla -->
+        <div>
         <table style="text-align: left; border-collapse: collapse;" class="table table-hover">
             <thead style="background-color: green; color: white;">
                 <tr>
@@ -21,21 +28,19 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach ($datos as $dato)
+                @foreach ($datos as $dato)
                 <tr>
                     <td style="border: 1px solid black;">
                         {{$dato->nombre_lp}}
-
                     </td>
                     <td style="border: 1px solid black; text-align: center;">
                         <!-- Boton de editar -->
                         <a href="{{ route('formularioLugarPrestacion.edit', ['idlugar_prestacion' => $dato->idlugar_prestacion]) }}" class="btn btn-success btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
-
                     </td>
                     <td style="border: 1px solid black; text-align: center;">
-                        <form action="{{url('LugarPrestacion/'.$dato->idlugar_prestacion)}}" method="post">
-                            @method("DELETE")
+                        <form action="{{ route('lugar_prestacion.destroy', $dato->idlugar_prestacion) }}" method="POST">
                             @csrf
+                            @method('DELETE')
                             <!-- Boton de eliminar -->
                             <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></button>
                         </form>
@@ -44,6 +49,7 @@
                 @endforeach
             </tbody>
         </table>
+        </div>
     </div>
 </main>
 
@@ -67,5 +73,6 @@
     });
 </script>
 @endsection
+
 
 

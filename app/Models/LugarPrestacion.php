@@ -32,5 +32,18 @@ class LugarPrestacion extends Model
         return $this->belongsTo(Proyectos_ofertados::class,'id_lugar_prestacion','idlugar_prestacion');
     }
 
+    public function relacionesDepto()
+{
+    return $this->hasMany(RelLugPresDepto::class, 'id_lugar_prest');
+}
+
+    public function relLugPresDeptos()
+    {
+        return $this->hasMany(RelLugPresDepto::class, 'id_lugar_prest')->onDelete('cascade');
+    }
+
+    
+
+
     use HasFactory;
 }
