@@ -18,8 +18,8 @@
             Proyectos ofertados
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Registrar Proyecto</a></li>
-            <li><a class="dropdown-item" href="#">Ver Proyecto</a></li>
+            <li><a class="dropdown-item" href="{{url('proyectos_ofertados/create')}}">Registrar Proyecto</a></li>
+            <li><a class="dropdown-item" href="{{url('proyectos_ofertados')}}">Ver Proyecto</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -27,8 +27,8 @@
             Coordinadores
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Registrar Coordinador</a></li>
-            <li><a class="dropdown-item" href="#">Ver Coordinador</a></li>
+            <li><a class="dropdown-item" href="{{url('coordinador/create')}}">Registrar Coordinador</a></li>
+            <li><a class="dropdown-item" href="{{url('coordinador')}}">Ver Coordinador</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -36,8 +36,8 @@
             Áreas
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Registrar Área</a></li>
-            <li><a class="dropdown-item" href="#">Ver Áreas</a></li>
+            <li><a class="dropdown-item" href="{{url('area/create')}}">Registrar Área</a></li>
+            <li><a class="dropdown-item" href="{{url('area')}}">Ver Áreas</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -54,8 +54,8 @@
             Lugar de Prestación
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Registrar Lugar de Prestación</a></li>
-            <li><a class="dropdown-item" href="#">Consultar Lugar de Prestación</a></li>
+            <li><a class="dropdown-item" href="{{url('/FormularioLugarP/create')}}">Registrar Lugar de Prestación</a></li>
+            <li><a class="dropdown-item" href="{{url('/FormularioLugarP')}}">Consultar Lugar de Prestación</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -82,37 +82,5 @@
   </div>
 </nav>
 
-<main>
-    <div class="container py-4">
-        <h2>Menú de direccionamiento</h2>
-        <table style="text-align: left" class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Proyectos ofertados</th>
-                    <th>Coordinadores</th>
-                    <th>Areas</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{--PROYECTOS OFERTADOS--}}
-                <td>
-                    <li><a href="{{url('proyectos_ofertados/create')}}">Registrar proyecto</a></li>
-                    <li><a href="{{url('proyectos_ofertados')}}">Ver Proyectos</a></li>
-                </td>
-                {{--COORDINADORES--}}
-                <td>
-                    <li><a href="{{url('coordinador/create')}}">Registrar coordinador</a></li>
-                    <li><a href="{{url('coordinador')}}">Ver coordinadores</a></li>
-                </td>
-                {{--AREAS--}}
-                <td>
-                    <li><a href="{{url('area/create')}}">Registrar Area</a></li>
-                    <li><a href="{{url('area')}}">Ver Areas</a></li>
-                </td>
-            </tbody>
-        </table>
-
-    </div>
-</main>
 
 @endsection
