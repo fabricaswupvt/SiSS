@@ -15,24 +15,6 @@
       </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Proyectos ofertados
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{{url('proyectos_ofertados/create')}}">Registrar Proyecto</a></li>
-            <li><a class="dropdown-item" href="{{url('proyectos_ofertados')}}">Ver Proyecto</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Coordinadores
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{{url('coordinador/create')}}">Registrar Coordinador</a></li>
-            <li><a class="dropdown-item" href="{{url('coordinador')}}">Ver Coordinador</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Áreas
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -70,6 +52,28 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Estadísticas</a>
         </li>
+        
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Programa Anual </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li class="dropdown dropend">
+                    <a class="dropdown-item dropdown-toggle" href="#" id="multilevelDropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Coordinador</a>
+                    <ul class="dropdown-menu" aria-labelledby="multilevelDropdownMenu1">
+                        <li><a class="dropdown-item" href="{{url('coordinador/create')}}">Registrar coordinador</a></li>
+                        <li><a class="dropdown-item" href="{{url('coordinador')}}">Ver coordinador</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown dropend">
+                    <a class="dropdown-item dropdown-toggle" href="#" id="multilevelDropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proyectos ofertados</a>
+                    <ul class="dropdown-menu" aria-labelledby="multilevelDropdownMenu1">
+                        <li><a class="dropdown-item" href="{{url('proyectos_ofertados/create')}}">Registrar proyecto</a></li>
+                        <li><a class="dropdown-item" href="{{url('proyectos_ofertados')}}">Ver proyecto</a></li>
+                    </ul>
+                </li>
+            </ul>
+        
+          </li>
+
         <li class="nav-item">
           <a class="nav-link" href="#"><i class="fa-solid fa-right-from-bracket"></i>Salir</a>
         </li>
@@ -82,5 +86,15 @@
   </div>
 </nav>
 
+<script>
+   
+    let dropdowns = document.querySelectorAll('.dropdown-toggle')
+    dropdowns.forEach((dd)=>{
+        dd.addEventListener('click', function (e) {
+            var el = this.nextElementSibling
+            el.style.display = el.style.display==='block'?'none':'block'
+        })
+    })
+</script>
 
 @endsection

@@ -19,7 +19,7 @@
 
         <!-- Tabla -->
         <div>
-        <table style="text-align: left; border-collapse: collapse;" class="table table-hover">
+        <table class="table table-hover">
             <thead style="background-color: green; color: white;">
                 <tr>
                     <th style="border: 1px solid black;">Nombre</th>
