@@ -270,9 +270,6 @@ public function destroy($idlugar_prestacion)
         $lugar_prestacion->estatus = 'INACTIVO';
         $lugar_prestacion->save();
 
-        // Nota: Si no quieres mostrar registros relacionados de 'rel_lug_pres_depto' cuando el 'lugar_prestacion' está inactivo,
-        // puedes modificar o eliminar la relación aquí, o bien, gestionarlo a través de la lógica de tu aplicación.
-
         // Redirigir a la página de índice con un mensaje
         return redirect()->route('DatosLugarPrestacion.index')->with('success', 'Registro marcado como inactivo correctamente');
     }

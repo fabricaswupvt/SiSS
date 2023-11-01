@@ -38,12 +38,12 @@
                         <a href="{{ route('formularioLugarPrestacion.edit', ['idlugar_prestacion' => $dato->idlugar_prestacion]) }}" class="btn btn-success btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
                     </td>
                     <td style="border: 1px solid black; text-align: center;">
-                        <form action="{{ route('DatosLugarPrestacion.destroy', $dato->idlugar_prestacion) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <!-- Boton de eliminar -->
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></button>
-                        </form>
+                    <form id="deleteForm_{{ $dato->idlugar_prestacion }}" action="{{ route('DatosLugarPrestacion.destroy', $dato->idlugar_prestacion) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <!-- Boton de eliminar -->
+                        <button data-id="{{ $dato->idlugar_prestacion }}" class="btn btn-danger btn-sm deleteButton"><i class="fa-solid fa-trash-can"></i></button>
+                    </form>
                     </td>
                 </tr>
                 @endforeach
@@ -71,6 +71,59 @@
             }
         });
     });
+
+
+    
+    const style = document.createElement('style');
+style.type = 'text/css';
+style.innerHTML = `.swal2-button-margin { margin-left: 10px; }`;
+document.head.appendChild(style);
+    document.addEventListener('DOMContentLoaded', function() {
+
+console.log("Documento cargado");
+
+const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger swal2-button-margin' 
+    },
+    buttonsStyling: false
+});
+
+let deleteButtons = document.querySelectorAll('.deleteButton');
+console.log("Número de botones encontrados: " + deleteButtons.length);
+
+deleteButtons.forEach(function(button) {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log("Botón de eliminar presionado");
+
+        const formId = 'deleteForm_' + button.getAttribute('data-id');
+        console.log("Formulario a enviar: " + formId);
+
+        swalWithBootstrapButtons.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esta acción!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, Eliminar',
+            cancelButtonText: 'No, Cancelar',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(formId).submit();  // Envía el formulario correcto basado en el botón que fue clickeado
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelado',
+                    'El registro está a salvo.',
+                    'error'
+                );
+            }
+        });
+    });
+});
+});
+
 </script>
 @endsection
 
