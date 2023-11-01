@@ -21,7 +21,7 @@ class LugarPrestacionController extends Controller
 {
     public function index(){
 
-        $datos = DB::table('lugar_prestacion')->get(); // Reemplaza 'nombre_de_la_tabla' con el nombre real de tu tabla
+        $datos = DB::table('lugar_prestacion')->where('estatus', 'ACTIVO')->get();
         return view('DatosLugarPrestacion.index', compact('datos'));
     }
     
@@ -261,18 +261,20 @@ class LugarPrestacionController extends Controller
 
 public function destroy($idlugar_prestacion)
 {
-    // Buscar y eliminar registros relacionados en la tabla 'rel_lug_pres_depto'
-    RelLugPresDepto::where('id_lugar_prest', $idlugar_prestacion)->delete();
-
-    // Buscar el lugar de prestación por su ID y eliminarlo
+    \Log::info("Intentando eliminar el registro con id: $idlugar_prestacion");
+    // Buscar el lugar de prestación por su ID
     $lugar_prestacion = LugarPrestacion::find($idlugar_prestacion);
 
     if ($lugar_prestacion) {
-        // Eliminar el lugar de prestación
-        $lugar_prestacion->delete();
+        // Cambiar el estado a "Inactivo"
+        $lugar_prestacion->estatus = 'INACTIVO';
+        $lugar_prestacion->save();
+
+        // Nota: Si no quieres mostrar registros relacionados de 'rel_lug_pres_depto' cuando el 'lugar_prestacion' está inactivo,
+        // puedes modificar o eliminar la relación aquí, o bien, gestionarlo a través de la lógica de tu aplicación.
 
         // Redirigir a la página de índice con un mensaje
-        return redirect()->route('DatosLugarPrestacion.index')->with('success', 'Registro eliminado correctamente');
+        return redirect()->route('DatosLugarPrestacion.index')->with('success', 'Registro marcado como inactivo correctamente');
     }
 
     // Si no se encuentra el lugar de prestación, redirigir con un mensaje de error

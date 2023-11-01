@@ -40,7 +40,7 @@ Route::post('/ruta-para-actualizar/{idlugar_prestacion}', [LugarPrestacionContro
 
 Route::get('/ruta-para-editar/{idlugar_prestacion}', [LugarPrestacionController::class, 'edit'])->name('formularioLugarPrestacion.edit');
 
-Route::delete('lugar_prestacion/{id}', [LugarPrestacionController::class, 'destroy'])->name('lugar_prestacion.destroy');
+Route::delete('/lugar_prestacion/{idlugar_prestacion}', [LugarPrestacionController::class, 'destroy'])->name('DatosLugarPrestacion.destroy');
 
 Route::get('datos-lugar-prestacion', [LugarPrestacionController::class, 'index'])->name('DatosLugarPrestacion.index');
 

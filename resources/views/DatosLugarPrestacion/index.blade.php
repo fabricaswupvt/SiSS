@@ -38,7 +38,7 @@
                         <a href="{{ route('formularioLugarPrestacion.edit', ['idlugar_prestacion' => $dato->idlugar_prestacion]) }}" class="btn btn-success btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
                     </td>
                     <td style="border: 1px solid black; text-align: center;">
-                        <form action="{{ route('lugar_prestacion.destroy', $dato->idlugar_prestacion) }}" method="POST">
+                        <form action="{{ route('DatosLugarPrestacion.destroy', $dato->idlugar_prestacion) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <!-- Boton de eliminar -->
