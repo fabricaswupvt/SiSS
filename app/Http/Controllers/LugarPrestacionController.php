@@ -187,22 +187,33 @@ class LugarPrestacionController extends Controller
     public function update(Request $request, $idlugar_prestacion)
 {
     $request->validate([
-        'nombre_pais' => 'required',
-        'nombre_edo' => 'required',
-        'nombre_mun' => 'required',
-        'nombre_ciudad' => 'required',
-        'nombre_col' => 'required',
-        'cp' => 'required',
-        'calle' => 'required',
+        'rfc' => 'required|size:12,13',
+        'nombre_lp' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'sector' => 'required|in:publico,privado',
+        'tipolp' => 'required|in:federal,estatal,municipal',
+        'giro' => 'required',
+        'calle' => 'required|regex:/^[a-zA-Z\s]+$/',
         'no_ext' => 'required',
         'no_int' => 'required',
-        'referencia' => 'required',
-        'giro' => 'required',
-        'tipolp' => 'required',
-        'sector' => 'required',
-        'nombre_lp' => 'required',
-        'rfc' => 'required',
+        'referencia' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'nombre_col' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'cp' => 'required|digits:5',
+        'nombre_ciudad' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'nombre_pais' => 'required',
+        'nombre_edo' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'nombre_mun' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'nombre_depto' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'nombre' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'ape_pat' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'ape_mat' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'titulo' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'cargo' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'telefono_fijo' => 'required|digits:10',
+        'celular' => 'required|digits:10',
+        'telefono_ref' => 'required|digits:10',
+        'correo' => 'required|email',
     ]);
+    
 
     // Obtener el coordinador que deseas actualizar
     $lugar_prestacion = LugarPrestacion::find($idlugar_prestacion);

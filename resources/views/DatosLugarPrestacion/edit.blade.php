@@ -32,7 +32,7 @@
         </div>
         <div class="col-md-4">
           <label for="sector" class="form-label">Sector</label>
-          <select class="form-select" aria-label="Default select example" name="sector" id="sector">
+          <select class="form-select" aria-label="Default select example" name="sector" id="sector" required>
             <option selected>Selecciona una opción</option>
             <option value="publico" {{ old('sector', $lugar_prestacion->sector) == 'publico' ? 'selected' : '' }}>Público</option>
             <option value="privado" {{ old('sector', $lugar_prestacion->sector) == 'privado' ? 'selected' : '' }}>Privado</option>
@@ -40,7 +40,7 @@
         </div>
         <div class="col-md-4">
           <label class="form-label">Tipo</label>
-          <select class="form-select" aria-label="Default select example" name="tipolp" id="tipolp">
+          <select class="form-select" aria-label="Default select example" name="tipolp" id="tipolp" required>
             <option selected>Selecciona una opción</option>
             <option value="federal" {{ old('tipolp', $lugar_prestacion->tipolp) == 'federal' ? 'selected' : '' }}>Federal</option>
             <option value="estatal" {{ old('tipolp', $lugar_prestacion->tipolp) == 'estatal' ? 'selected' : '' }}>Estatal</option>
@@ -98,7 +98,7 @@
         </div>
         <div class="col-md-4" style="margin-bottom: 20px;">
   <label class="form-label">País</label>
-  <select class="form-select" name="nombre_pais" id="nombre_pais" aria-label="Default select example">
+  <select class="form-select" name="nombre_pais" id="nombre_pais" aria-label="Default select example" required >
     <option selected>Selecciona una opción</option>
     @foreach($paises as $pais)
       <option value="{{ $pais }}">{{ $pais }}</option>
@@ -108,7 +108,7 @@
 
 <div class="d-flex justify-content-center" style="margin-top: 20px;">
   <button type="submit" class="btn btn-success mx-2">Guardar</button>
-  <a href="{{url('menu')}}" class="btn btn-success mx-2">Cancelar</a>
+  <a href="{{url('FormularioLugarP')}}" class="btn btn-success mx-2">Cancelar</a>
 </div>
     </form>
   </div>

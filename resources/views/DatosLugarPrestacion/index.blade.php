@@ -72,10 +72,15 @@
         });
     });
 
-
-    
     const style = document.createElement('style');
     document.addEventListener('DOMContentLoaded', function() {
+                const style = document.createElement('style');
+            style.textContent = `
+                .swal2-cancel {
+                    margin-right: 10px; 
+                }
+            `;  
+    document.head.appendChild(style);
 
         console.log("Documento cargado");
 
@@ -85,6 +90,8 @@
                 cancelButton: 'btn btn-danger' 
             },
             buttonsStyling: false
+
+            
         });
 
         let deleteButtons = document.querySelectorAll('.deleteButton');
@@ -103,12 +110,18 @@
                     text: "¡No podrás revertir esta acción!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Si, Eliminar',
-                    cancelButtonText: 'No, Cancelar',
+                    confirmButtonText: 'Eliminar',
+                    cancelButtonText: 'Cancelar',
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        document.getElementById(formId).submit();  // Envía el formulario correcto basado en el botón que fue clickeado
+                        swalWithBootstrapButtons.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        }).then(() => {
+                            document.getElementById(formId).submit(); // Envía el formulario después de que el usuario confirme la segunda alerta
+                        });
                     } else if (result.dismiss === Swal.DismissReason.cancel) {
                         swalWithBootstrapButtons.fire(
                             'Cancelado',
